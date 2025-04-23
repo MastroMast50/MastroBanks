@@ -1,0 +1,21 @@
+name: MastroBanks
+version: '2.0-SNAPSHOT'
+main: me.mastromast50.mastroBanks.MastroBanks
+api-version: '1.17'
+commands:
+  withdraw:
+    description: Ritira soldi dal conto bancario
+    permission: mastroBanks.withdraw
+    usage: /withdraw <importo>
+  conto:
+    description: Gestisci il tuo conto bancario
+    permission: mastrobanks.banchiere
+    usage: /conto [info|crea|chiudi]
+  confirmdelete:
+      description: Semaforo binario di segnalazione
+      usage: Non destinato all'uso
+  setatm:
+    description: Comando per settare gli atm
+    permission: mastrobanks.admin
+    usage: Guarda un blocco per settare l'atm
+depend: [Vault]

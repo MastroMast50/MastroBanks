@@ -1,0 +1,18 @@
+banknotes:
+  item: STICK
+  customModelData10: 10
+  customModelData20: 10
+  customModelData50: 10
+  customModelData100: 10
+  customModelData200: 10
+  customModelData500: 10
+credit:
+  item: STICK
+  customModelData-creditCard: 10
+atm-blocks:
+
+limit-count:
+  DEFAULT: 1000
+  IRON: 10000
+  GOLD: 50000
+  DIAMOND: 100000
