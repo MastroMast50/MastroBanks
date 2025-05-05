@@ -62,7 +62,7 @@ public class ATMUtils {
         depositLore.add(ChatColor.translateAlternateColorCodes('&', "&7&nClicca per depositare"));
         depositMeta.setLore(depositLore);
         depositItem.setItemMeta(depositMeta);
-        inventory.setItem(3, depositItem);  // Posizione 3
+        inventory.setItem(3, depositItem); 
 
         ItemStack preleva = new ItemStack(Material.RED_CONCRETE);
         ItemMeta prelevaMeta = preleva.getItemMeta();
@@ -71,13 +71,13 @@ public class ATMUtils {
         prelevaLore.add(ChatColor.translateAlternateColorCodes('&', "&7&nClicca per prelevare"));
         prelevaMeta.setLore(prelevaLore);
         preleva.setItemMeta(prelevaMeta);
-        inventory.setItem(5, preleva);  // Posizione 6
+        inventory.setItem(5, preleva);  
 
         ItemStack close = new ItemStack(Material.BARRIER);
         ItemMeta closeMeta = close.getItemMeta();
         closeMeta.setDisplayName(ChatColor.RED + "Chiudi ATM");
         close.setItemMeta(closeMeta);
-        inventory.setItem(8, close);  // Posizione 8
+        inventory.setItem(8, close);  
     }
 
     public void SetupInventoryPreleva() {
