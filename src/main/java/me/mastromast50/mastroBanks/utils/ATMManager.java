@@ -56,10 +56,5 @@ public class ATMManager {
             }
         }
     }
-    public void showATMEffect(Location loc) {
-        loc.getWorld().spawnParticle(Particle.VILLAGER_HAPPY,
-                loc.clone().add(0.5, 0.5, 0.5),
-                10, 0.3, 0.3, 0.3);
-    }
 
 }

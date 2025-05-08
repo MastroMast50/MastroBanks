@@ -92,17 +92,20 @@ public final class MastroBanks extends JavaPlugin {
     public void onEnable() {
         plugin = this;
 
+        // Crea la cartella se non esiste
         if (!getDataFolder().exists()) {
             getDataFolder().mkdirs();
         }
 
+        // Carica la config SOLO se non esiste
         File configFile = new File(getDataFolder(), "config.yml");
         if (!configFile.exists()) {
-            saveResource("config.yml", false); 
+            saveResource("config.yml", false); // false = non sovrascrivere se esiste
         }
 
-        reloadConfig();
+        reloadConfig(); // Ricarica i valori
 
+        // Il resto del tuo codice...
         createDatabase();
         loadDatabase();
         this.atmManager = new ATMManager(this);

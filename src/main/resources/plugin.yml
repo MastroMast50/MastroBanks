@@ -18,4 +18,12 @@ commands:
     description: Comando per settare gli atm
     permission: mastrobanks.admin
     usage: Guarda un blocco per settare l'atm
+  bonifico:
+    description: Transferisci i soldi ad un altro giocatore
+    usage: /bonifico <player> <importo>
+    aliases: [pay]
+  mastropay:
+    description: givva i soldi ad un altro giocatore
+    usage: /mastropay <player> <importo>
+    aliases: [mpay]
 depend: [Vault]

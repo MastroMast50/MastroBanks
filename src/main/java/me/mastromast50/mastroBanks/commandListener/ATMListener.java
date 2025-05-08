@@ -47,16 +47,18 @@ public class ATMListener implements Listener {
         Player player = event.getPlayer();
         ItemStack itemInHand = player.getInventory().getItemInMainHand();
 
+        // Carica il materiale dalla config
         String materialName = plugin.getConfig().getString("credit.item", "PAPER");
         Material creditCardMaterial = Material.getMaterial(materialName);
         if(creditCardMaterial == null) creditCardMaterial = Material.PAPER;
 
+        // Verifica carta di credito
         if(itemInHand == null || itemInHand.getType() != creditCardMaterial) {
             player.sendMessage(ChatColor.RED + "Devi avere in mano una carta di credito!");
             return;
         }
 
-
+        // Verifica meta della carta
         ItemMeta meta = itemInHand.getItemMeta();
         String expectedName = ChatColor.translateAlternateColorCodes('&',
                 "&aCarta di credito di &f" + player.getName());
@@ -66,6 +68,7 @@ public class ATMListener implements Listener {
             return;
         }
 
+        // Verifica conto bancario
         if(!plugin.getDatabaseConfig().contains("uuid." + player.getUniqueId())) {
             player.sendMessage(ChatColor.RED + "Non hai un conto bancario!");
             return;
@@ -130,11 +133,11 @@ public class ATMListener implements Listener {
                 ItemStack item = utils.itemBanknotes(10);
                 Economy economy = plugin.getEconomy();
 
-
+                // Cerca la banconota nell'inventario
                 for(int i = 0; i < inventory.getSize(); i++) {
                     ItemStack currentItem = inventory.getItem(i);
                     if(currentItem != null && currentItem.isSimilar(item)) {
-
+                        // Controlla il limite del conto
                         String accountType = checkCount(player);
                         double limit = plugin.getConfig().getDouble("limit-count." + accountType);
 
@@ -143,17 +146,19 @@ public class ATMListener implements Listener {
                             return;
                         }
 
-
+                        // Rimuovi la banconota
                         currentItem.setAmount(currentItem.getAmount() - 1);
                         if(currentItem.getAmount() <= 0) {
                             inventory.setItem(i, null);
                         }
 
+                        // Deposita i soldi
                         economy.depositPlayer(player, 10);
 
+                        // Aggiorna il saldo nel database
                         String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                         plugin.getDatabaseConfig().set(path, economy.getBalance(player));
-                        plugin.saveDatabaseConfig(); 
+                        plugin.saveDatabaseConfig(); // IMPORTANTE: salva le modifiche
 
                         player.sendMessage(ChatColor.GREEN + "Hai depositato 10€");
                         return;
@@ -168,9 +173,11 @@ public class ATMListener implements Listener {
                 ItemStack item = utils.itemBanknotes(20);
                 Economy economy = plugin.getEconomy();
 
+                // Cerca la banconota nell'inventario
                 for(int i = 0; i < inventory.getSize(); i++) {
                     ItemStack currentItem = inventory.getItem(i);
                     if(currentItem != null && currentItem.isSimilar(item)) {
+                        // Controlla il limite del conto
                         String accountType = checkCount(player);
                         double limit = plugin.getConfig().getDouble("limit-count." + accountType);
 
@@ -179,13 +186,16 @@ public class ATMListener implements Listener {
                             return;
                         }
 
+                        // Rimuovi la banconota
                         currentItem.setAmount(currentItem.getAmount() - 1);
                         if(currentItem.getAmount() <= 0) {
                             inventory.setItem(i, null);
                         }
 
+                        // Deposita i soldi
                         economy.depositPlayer(player, 20);
 
+                        // Aggiorna il saldo nel database
                         String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                         plugin.getDatabaseConfig().set(path, economy.getBalance(player));
                         plugin.saveDatabaseConfig(); // IMPORTANTE: salva le modifiche
@@ -203,9 +213,11 @@ public class ATMListener implements Listener {
                 ItemStack item = utils.itemBanknotes(50);
                 Economy economy = plugin.getEconomy();
 
+                // Cerca la banconota nell'inventario
                 for(int i = 0; i < inventory.getSize(); i++) {
                     ItemStack currentItem = inventory.getItem(i);
                     if(currentItem != null && currentItem.isSimilar(item)) {
+                        // Controlla il limite del conto
                         String accountType = checkCount(player);
                         double limit = plugin.getConfig().getDouble("limit-count." + accountType);
 
@@ -214,16 +226,19 @@ public class ATMListener implements Listener {
                             return;
                         }
 
+                        // Rimuovi la banconota
                         currentItem.setAmount(currentItem.getAmount() - 1);
                         if(currentItem.getAmount() <= 0) {
                             inventory.setItem(i, null);
                         }
 
+                        // Deposita i soldi
                         economy.depositPlayer(player, 50);
 
+                        // Aggiorna il saldo nel database
                         String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                         plugin.getDatabaseConfig().set(path, economy.getBalance(player));
-                        plugin.saveDatabaseConfig();
+                        plugin.saveDatabaseConfig(); // IMPORTANTE: salva le modifiche
 
                         player.sendMessage(ChatColor.GREEN + "Hai depositato 50€");
                         return;
@@ -238,9 +253,11 @@ public class ATMListener implements Listener {
                 ItemStack item = utils.itemBanknotes(50);
                 Economy economy = plugin.getEconomy();
 
+                // Cerca la banconota nell'inventario
                 for(int i = 0; i < inventory.getSize(); i++) {
                     ItemStack currentItem = inventory.getItem(i);
                     if(currentItem != null && currentItem.isSimilar(item)) {
+                        // Controlla il limite del conto
                         String accountType = checkCount(player);
                         double limit = plugin.getConfig().getDouble("limit-count." + accountType);
 
@@ -249,16 +266,19 @@ public class ATMListener implements Listener {
                             return;
                         }
 
+                        // Rimuovi la banconota
                         currentItem.setAmount(currentItem.getAmount() - 1);
                         if(currentItem.getAmount() <= 0) {
                             inventory.setItem(i, null);
                         }
 
+                        // Deposita i soldi
                         economy.depositPlayer(player, 50);
 
+                        // Aggiorna il saldo nel database
                         String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                         plugin.getDatabaseConfig().set(path, economy.getBalance(player));
-                        plugin.saveDatabaseConfig();
+                        plugin.saveDatabaseConfig(); // IMPORTANTE: salva le modifiche
 
                         player.sendMessage(ChatColor.GREEN + "Hai depositato 50€");
                         return;
@@ -273,9 +293,11 @@ public class ATMListener implements Listener {
                 ItemStack item = utils.itemBanknotes(100);
                 Economy economy = plugin.getEconomy();
 
+                // Cerca la banconota nell'inventario
                 for(int i = 0; i < inventory.getSize(); i++) {
                     ItemStack currentItem = inventory.getItem(i);
                     if(currentItem != null && currentItem.isSimilar(item)) {
+                        // Controlla il limite del conto
                         String accountType = checkCount(player);
                         double limit = plugin.getConfig().getDouble("limit-count." + accountType);
 
@@ -284,16 +306,19 @@ public class ATMListener implements Listener {
                             return;
                         }
 
+                        // Rimuovi la banconota
                         currentItem.setAmount(currentItem.getAmount() - 1);
                         if(currentItem.getAmount() <= 0) {
                             inventory.setItem(i, null);
                         }
 
+                        // Deposita i soldi
                         economy.depositPlayer(player, 100);
 
+                        // Aggiorna il saldo nel database
                         String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                         plugin.getDatabaseConfig().set(path, economy.getBalance(player));
-                        plugin.saveDatabaseConfig(); 
+                        plugin.saveDatabaseConfig(); // IMPORTANTE: salva le modifiche
 
                         player.sendMessage(ChatColor.GREEN + "Hai depositato 100€");
                         return;
@@ -308,9 +333,11 @@ public class ATMListener implements Listener {
                 ItemStack item = utils.itemBanknotes(200);
                 Economy economy = plugin.getEconomy();
 
+                // Cerca la banconota nell'inventario
                 for(int i = 0; i < inventory.getSize(); i++) {
                     ItemStack currentItem = inventory.getItem(i);
                     if(currentItem != null && currentItem.isSimilar(item)) {
+                        // Controlla il limite del conto
                         String accountType = checkCount(player);
                         double limit = plugin.getConfig().getDouble("limit-count." + accountType);
 
@@ -319,16 +346,19 @@ public class ATMListener implements Listener {
                             return;
                         }
 
+                        // Rimuovi la banconota
                         currentItem.setAmount(currentItem.getAmount() - 1);
                         if(currentItem.getAmount() <= 0) {
                             inventory.setItem(i, null);
                         }
 
+                        // Deposita i soldi
                         economy.depositPlayer(player, 200);
 
+                        // Aggiorna il saldo nel database
                         String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                         plugin.getDatabaseConfig().set(path, economy.getBalance(player));
-                        plugin.saveDatabaseConfig();
+                        plugin.saveDatabaseConfig(); // IMPORTANTE: salva le modifiche
 
                         player.sendMessage(ChatColor.GREEN + "Hai depositato 200€");
                         return;
@@ -343,9 +373,11 @@ public class ATMListener implements Listener {
                 ItemStack item = utils.itemBanknotes(500);
                 Economy economy = plugin.getEconomy();
 
+                // Cerca la banconota nell'inventario
                 for(int i = 0; i < inventory.getSize(); i++) {
                     ItemStack currentItem = inventory.getItem(i);
                     if(currentItem != null && currentItem.isSimilar(item)) {
+                        // Controlla il limite del conto
                         String accountType = checkCount(player);
                         double limit = plugin.getConfig().getDouble("limit-count." + accountType);
 
@@ -354,16 +386,19 @@ public class ATMListener implements Listener {
                             return;
                         }
 
+                        // Rimuovi la banconota
                         currentItem.setAmount(currentItem.getAmount() - 1);
                         if(currentItem.getAmount() <= 0) {
                             inventory.setItem(i, null);
                         }
 
+                        // Deposita i soldi
                         economy.depositPlayer(player, 500);
 
+                        // Aggiorna il saldo nel database
                         String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                         plugin.getDatabaseConfig().set(path, economy.getBalance(player));
-                        plugin.saveDatabaseConfig(); 
+                        plugin.saveDatabaseConfig(); // IMPORTANTE: salva le modifiche
 
                         player.sendMessage(ChatColor.GREEN + "Hai depositato 500€");
                         return;
@@ -376,18 +411,21 @@ public class ATMListener implements Listener {
 
             if (displayname.contains((ChatColor.translateAlternateColorCodes('&', "&a10€")))) {
                 Economy economy = plugin.getEconomy();
-                if (economy.getBalance(player) < 10) { 
+                if (economy.getBalance(player) < 10) {  // Cambiato da 20 a 10 per coerenza
                     player.closeInventory();
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cNon hai abbastanza soldi"));
                     return;
                 }
 
+                // Prelievo
                 economy.withdrawPlayer(player, 10);
 
+                // Aggiorna il databaseconfig
                 String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                 plugin.getDatabaseConfig().set(path, economy.getBalance(player));
                 plugin.saveDatabaseConfig();
 
+                // Aggiungi banconota
                 GenericUtils utils = new GenericUtils(plugin);
                 utils.addBanknotes(10, player);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eHai prelevato &n10€"));
@@ -396,18 +434,21 @@ public class ATMListener implements Listener {
 
             if (displayname.contains((ChatColor.translateAlternateColorCodes('&', "&a20€")))) {
                 Economy economy = plugin.getEconomy();
-                if (economy.getBalance(player) < 20) { 
+                if (economy.getBalance(player) < 20) {  // Cambiato da 20 a 10 per coerenza
                     player.closeInventory();
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cNon hai abbastanza soldi"));
                     return;
                 }
 
+                // Prelievo
                 economy.withdrawPlayer(player, 20);
 
+                // Aggiorna il databaseconfig
                 String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                 plugin.getDatabaseConfig().set(path, economy.getBalance(player));
                 plugin.saveDatabaseConfig();
 
+                // Aggiungi banconota
                 GenericUtils utils = new GenericUtils(plugin);
                 utils.addBanknotes(20, player);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eHai prelevato &n20€"));
@@ -415,18 +456,21 @@ public class ATMListener implements Listener {
 
             if (displayname.contains((ChatColor.translateAlternateColorCodes('&', "&a50€")))) {
                 Economy economy = plugin.getEconomy();
-                if (economy.getBalance(player) < 50) {
+                if (economy.getBalance(player) < 50) {  // Cambiato da 20 a 10 per coerenza
                     player.closeInventory();
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cNon hai abbastanza soldi"));
                     return;
                 }
 
+                // Prelievo
                 economy.withdrawPlayer(player, 50);
 
+                // Aggiorna il databaseconfig
                 String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                 plugin.getDatabaseConfig().set(path, economy.getBalance(player));
                 plugin.saveDatabaseConfig();
 
+                // Aggiungi banconota
                 GenericUtils utils = new GenericUtils(plugin);
                 utils.addBanknotes(50, player);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eHai prelevato &n50€"));
@@ -434,18 +478,21 @@ public class ATMListener implements Listener {
 
             if (displayname.contains((ChatColor.translateAlternateColorCodes('&', "&a100€")))) {
                 Economy economy = plugin.getEconomy();
-                if (economy.getBalance(player) < 100) {  
+                if (economy.getBalance(player) < 100) {  // Cambiato da 20 a 10 per coerenza
                     player.closeInventory();
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cNon hai abbastanza soldi"));
                     return;
                 }
 
+                // Prelievo
                 economy.withdrawPlayer(player, 100);
 
+                // Aggiorna il databaseconfig
                 String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                 plugin.getDatabaseConfig().set(path, economy.getBalance(player));
                 plugin.saveDatabaseConfig();
 
+                // Aggiungi banconota
                 GenericUtils utils = new GenericUtils(plugin);
                 utils.addBanknotes(100, player);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eHai prelevato &n100€"));
@@ -453,18 +500,21 @@ public class ATMListener implements Listener {
 
             if (displayname.contains((ChatColor.translateAlternateColorCodes('&', "&a200€")))) {
                 Economy economy = plugin.getEconomy();
-                if (economy.getBalance(player) < 200) {  
+                if (economy.getBalance(player) < 200) {  // Cambiato da 20 a 10 per coerenza
                     player.closeInventory();
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cNon hai abbastanza soldi"));
                     return;
                 }
 
+                // Prelievo
                 economy.withdrawPlayer(player, 200);
 
+                // Aggiorna il databaseconfig
                 String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                 plugin.getDatabaseConfig().set(path, economy.getBalance(player));
                 plugin.saveDatabaseConfig();
 
+                // Aggiungi banconota
                 GenericUtils utils = new GenericUtils(plugin);
                 utils.addBanknotes(200, player);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eHai prelevato &n200€"));
@@ -472,18 +522,21 @@ public class ATMListener implements Listener {
 
             if (displayname.contains((ChatColor.translateAlternateColorCodes('&', "&a500€")))) {
                 Economy economy = plugin.getEconomy();
-                if (economy.getBalance(player) < 500) { 
+                if (economy.getBalance(player) < 500) {  // Cambiato da 20 a 10 per coerenza
                     player.closeInventory();
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cNon hai abbastanza soldi"));
                     return;
                 }
 
+                // Prelievo
                 economy.withdrawPlayer(player, 500);
 
+                // Aggiorna il databaseconfig
                 String path = "uuid." + player.getUniqueId().toString() + ".dat.saldo";
                 plugin.getDatabaseConfig().set(path, economy.getBalance(player));
                 plugin.saveDatabaseConfig();
 
+                // Aggiungi banconota
                 GenericUtils utils = new GenericUtils(plugin);
                 utils.addBanknotes(500, player);
                 player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eHai prelevato &n10€"));

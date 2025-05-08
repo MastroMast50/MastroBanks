@@ -73,9 +73,12 @@ public class GenericUtils {
 
         ItemStack libro = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta metaLibro = (BookMeta) libro.getItemMeta();
+
         metaLibro.setAuthor("MastroBanks");
-        metaLibro.setDisplayName(ChatColor.translateAlternateColorCodes('&',"&9Credenziali bancarie di "+ player.getName()));
-        metaLibro.addPage(ChatColor.translateAlternateColorCodes('&',"&aIl &l&nPIN &a del tuo conto è:&8&l" + pin));
+        metaLibro.setTitle("Credenziali Bancarie");
+        metaLibro.setDisplayName(ChatColor.translateAlternateColorCodes('&', "&9Credenziali bancarie di " + player.getName()));
+        metaLibro.addPage(ChatColor.translateAlternateColorCodes('&', "&aIl &l&nPIN &a del tuo conto è:&8&l " + pin));
+
         libro.setItemMeta(metaLibro);
         player.getInventory().addItem(libro);
     }
